@@ -16,6 +16,7 @@
 		D736C1CA210C943200ACC084 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D736C1C5210C943200ACC084 /* Info.plist */; };
 		D736C1D0210CC17B00ACC084 /* AYMoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1CF210CC17B00ACC084 /* AYMoviesListViewController.swift */; };
 		D736C1D2210D700200ACC084 /* AYMovieListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1D1210D700200ACC084 /* AYMovieListCollectionCell.swift */; };
+		D736C1D4210D732500ACC084 /* AYReusableCellHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1D3210D732500ACC084 /* AYReusableCellHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		D736C1C5210C943200ACC084 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D736C1CF210CC17B00ACC084 /* AYMoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMoviesListViewController.swift; sourceTree = "<group>"; };
 		D736C1D1210D700200ACC084 /* AYMovieListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMovieListCollectionCell.swift; sourceTree = "<group>"; };
+		D736C1D3210D732500ACC084 /* AYReusableCellHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYReusableCellHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		D736C1BC210C943200ACC084 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D736C1D3210D732500ACC084 /* AYReusableCellHandler.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D736C1D0210CC17B00ACC084 /* AYMoviesListViewController.swift in Sources */,
+				D736C1D4210D732500ACC084 /* AYReusableCellHandler.swift in Sources */,
 				D736C1C9210C943200ACC084 /* AppDelegate.swift in Sources */,
 				D736C1D2210D700200ACC084 /* AYMovieListCollectionCell.swift in Sources */,
 			);

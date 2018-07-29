@@ -8,6 +8,6 @@
 
 import UIKit
 
-class AYMovieListCollectionCell: UICollectionViewCell {
-    
+class AYMovieListCollectionCell: UICollectionViewCell, CellReusable {
+        
 }
