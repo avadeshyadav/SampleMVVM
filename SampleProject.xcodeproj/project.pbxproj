@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D736C18E210C932800ACC084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C18D210C932800ACC084 /* AppDelegate.swift */; };
-		D736C190210C932800ACC084 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C18F210C932800ACC084 /* ViewController.swift */; };
-		D736C193210C932800ACC084 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D736C191210C932800ACC084 /* Main.storyboard */; };
 		D736C195210C933300ACC084 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D736C194210C933300ACC084 /* Assets.xcassets */; };
-		D736C198210C933300ACC084 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D736C196210C933300ACC084 /* LaunchScreen.storyboard */; };
 		D736C1A3210C933400ACC084 /* SampleProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1A2210C933400ACC084 /* SampleProjectTests.swift */; };
 		D736C1AE210C933400ACC084 /* SampleProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1AD210C933400ACC084 /* SampleProjectUITests.swift */; };
+		D736C1C7210C943200ACC084 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D736C1C0210C943200ACC084 /* LaunchScreen.storyboard */; };
+		D736C1C8210C943200ACC084 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D736C1C2210C943200ACC084 /* Main.storyboard */; };
+		D736C1C9210C943200ACC084 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1C4210C943200ACC084 /* AppDelegate.swift */; };
+		D736C1CA210C943200ACC084 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D736C1C5210C943200ACC084 /* Info.plist */; };
+		D736C1D0210CC17B00ACC084 /* AYMoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1CF210CC17B00ACC084 /* AYMoviesListViewController.swift */; };
+		D736C1D2210D700200ACC084 /* AYMovieListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1D1210D700200ACC084 /* AYMovieListCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,18 +37,19 @@
 
 /* Begin PBXFileReference section */
 		D736C18A210C932800ACC084 /* SampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D736C18D210C932800ACC084 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D736C18F210C932800ACC084 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D736C192210C932800ACC084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D736C194210C933300ACC084 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D736C197210C933300ACC084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		D736C199210C933400ACC084 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D736C19E210C933400ACC084 /* SampleProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D736C1A2210C933400ACC084 /* SampleProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProjectTests.swift; sourceTree = "<group>"; };
 		D736C1A4210C933400ACC084 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D736C1A9210C933400ACC084 /* SampleProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D736C1AD210C933400ACC084 /* SampleProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProjectUITests.swift; sourceTree = "<group>"; };
 		D736C1AF210C933400ACC084 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D736C1C1210C943200ACC084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D736C1C3210C943200ACC084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D736C1C4210C943200ACC084 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D736C1C5210C943200ACC084 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D736C1CF210CC17B00ACC084 /* AYMoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMoviesListViewController.swift; sourceTree = "<group>"; };
+		D736C1D1210D700200ACC084 /* AYMovieListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMovieListCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +100,12 @@
 		D736C18C210C932800ACC084 /* SampleProject */ = {
 			isa = PBXGroup;
 			children = (
-				D736C18D210C932800ACC084 /* AppDelegate.swift */,
-				D736C18F210C932800ACC084 /* ViewController.swift */,
-				D736C191210C932800ACC084 /* Main.storyboard */,
+				D736C1BF210C943200ACC084 /* Application */,
+				D736C1BC210C943200ACC084 /* Extensions */,
+				D736C1C6210C943200ACC084 /* Networking */,
+				D736C1BD210C943200ACC084 /* ViewControllers */,
+				D736C1BE210C943200ACC084 /* ViewModels */,
 				D736C194210C933300ACC084 /* Assets.xcassets */,
-				D736C196210C933300ACC084 /* LaunchScreen.storyboard */,
-				D736C199210C933400ACC084 /* Info.plist */,
 			);
 			path = SampleProject;
 			sourceTree = "<group>";
@@ -123,6 +126,63 @@
 				D736C1AF210C933400ACC084 /* Info.plist */,
 			);
 			path = SampleProjectUITests;
+			sourceTree = "<group>";
+		};
+		D736C1BC210C943200ACC084 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D736C1BD210C943200ACC084 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D736C1CB210CC0E900ACC084 /* MoviesList */,
+				D736C1CC210CC0E900ACC084 /* MovieDetails */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D736C1BE210C943200ACC084 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D736C1BF210C943200ACC084 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D736C1C0210C943200ACC084 /* LaunchScreen.storyboard */,
+				D736C1C2210C943200ACC084 /* Main.storyboard */,
+				D736C1C4210C943200ACC084 /* AppDelegate.swift */,
+				D736C1C5210C943200ACC084 /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D736C1C6210C943200ACC084 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		D736C1CB210CC0E900ACC084 /* MoviesList */ = {
+			isa = PBXGroup;
+			children = (
+				D736C1CF210CC17B00ACC084 /* AYMoviesListViewController.swift */,
+				D736C1D1210D700200ACC084 /* AYMovieListCollectionCell.swift */,
+			);
+			path = MoviesList;
+			sourceTree = "<group>";
+		};
+		D736C1CC210CC0E900ACC084 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MovieDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,9 +289,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D736C198210C933300ACC084 /* LaunchScreen.storyboard in Resources */,
+				D736C1CA210C943200ACC084 /* Info.plist in Resources */,
+				D736C1C8210C943200ACC084 /* Main.storyboard in Resources */,
 				D736C195210C933300ACC084 /* Assets.xcassets in Resources */,
-				D736C193210C932800ACC084 /* Main.storyboard in Resources */,
+				D736C1C7210C943200ACC084 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +317,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D736C190210C932800ACC084 /* ViewController.swift in Sources */,
-				D736C18E210C932800ACC084 /* AppDelegate.swift in Sources */,
+				D736C1D0210CC17B00ACC084 /* AYMoviesListViewController.swift in Sources */,
+				D736C1C9210C943200ACC084 /* AppDelegate.swift in Sources */,
+				D736C1D2210D700200ACC084 /* AYMovieListCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,20 +355,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D736C191210C932800ACC084 /* Main.storyboard */ = {
+		D736C1C0210C943200ACC084 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D736C192210C932800ACC084 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D736C196210C933300ACC084 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D736C197210C933300ACC084 /* Base */,
+				D736C1C1210C943200ACC084 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D736C1C2210C943200ACC084 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D736C1C3210C943200ACC084 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -431,7 +493,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SampleProject/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SampleProject/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -448,7 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = SampleProject/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SampleProject/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
