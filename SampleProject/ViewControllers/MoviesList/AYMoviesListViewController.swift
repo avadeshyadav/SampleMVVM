@@ -9,11 +9,32 @@
 import UIKit
 
 class AYMoviesListViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
-   
+    let model = AYMovieListViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        doInitialConfigurations()
+        loadMovies()
+    }
+    
+    private func doInitialConfigurations() {
+        self.title = "Movies"
+    }
+    
+    private func loadMovies() {
+      
+        model.getMoviesList { [weak self] (result) in
+            
+            switch (result) {
+            case .success:
+                self?.collectionView.reloadData()
+                
+            case .failure(let message):
+                print("received error while fetching data: \(message)")
+            }
+        }
     }
 }
 
@@ -21,7 +42,7 @@ class AYMoviesListViewController: UIViewController {
 extension AYMoviesListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return model.movieApiReponse.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

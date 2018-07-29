@@ -17,6 +17,12 @@
 		D736C1D0210CC17B00ACC084 /* AYMoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1CF210CC17B00ACC084 /* AYMoviesListViewController.swift */; };
 		D736C1D2210D700200ACC084 /* AYMovieListCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1D1210D700200ACC084 /* AYMovieListCollectionCell.swift */; };
 		D736C1D4210D732500ACC084 /* AYReusableCellHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1D3210D732500ACC084 /* AYReusableCellHandler.swift */; };
+		D74BE6A7210DD35700E1F792 /* AYMovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6A6210DD35700E1F792 /* AYMovieListViewModel.swift */; };
+		D74BE6AA210DDA9700E1F792 /* AYNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6A9210DDA9700E1F792 /* AYNetworkManager.swift */; };
+		D74BE6AC210E033500E1F792 /* AYMovieListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6AB210E033500E1F792 /* AYMovieListModel.swift */; };
+		D74BE6AE210E578400E1F792 /* AYNetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6AD210E578400E1F792 /* AYNetworkLogger.swift */; };
+		D74BE6B0210E57C500E1F792 /* AYUrlEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6AF210E57C500E1F792 /* AYUrlEncoder.swift */; };
+		D74BE6B2210E5D3200E1F792 /* FoundationAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6B1210E5D3200E1F792 /* FoundationAdditions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +58,12 @@
 		D736C1CF210CC17B00ACC084 /* AYMoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMoviesListViewController.swift; sourceTree = "<group>"; };
 		D736C1D1210D700200ACC084 /* AYMovieListCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMovieListCollectionCell.swift; sourceTree = "<group>"; };
 		D736C1D3210D732500ACC084 /* AYReusableCellHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYReusableCellHandler.swift; sourceTree = "<group>"; };
+		D74BE6A6210DD35700E1F792 /* AYMovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMovieListViewModel.swift; sourceTree = "<group>"; };
+		D74BE6A9210DDA9700E1F792 /* AYNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYNetworkManager.swift; sourceTree = "<group>"; };
+		D74BE6AB210E033500E1F792 /* AYMovieListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMovieListModel.swift; sourceTree = "<group>"; };
+		D74BE6AD210E578400E1F792 /* AYNetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYNetworkLogger.swift; sourceTree = "<group>"; };
+		D74BE6AF210E57C500E1F792 /* AYUrlEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYUrlEncoder.swift; sourceTree = "<group>"; };
+		D74BE6B1210E5D3200E1F792 /* FoundationAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationAdditions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +118,7 @@
 				D736C1BC210C943200ACC084 /* Extensions */,
 				D736C1C6210C943200ACC084 /* Networking */,
 				D736C1BD210C943200ACC084 /* ViewControllers */,
+				D74BE6A8210DD37A00E1F792 /* Models */,
 				D736C1BE210C943200ACC084 /* ViewModels */,
 				D736C194210C933300ACC084 /* Assets.xcassets */,
 			);
@@ -134,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				D736C1D3210D732500ACC084 /* AYReusableCellHandler.swift */,
+				D74BE6B1210E5D3200E1F792 /* FoundationAdditions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -150,6 +164,7 @@
 		D736C1BE210C943200ACC084 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D74BE6A6210DD35700E1F792 /* AYMovieListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -168,6 +183,9 @@
 		D736C1C6210C943200ACC084 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				D74BE6A9210DDA9700E1F792 /* AYNetworkManager.swift */,
+				D74BE6AD210E578400E1F792 /* AYNetworkLogger.swift */,
+				D74BE6AF210E57C500E1F792 /* AYUrlEncoder.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -186,6 +204,14 @@
 			children = (
 			);
 			path = MovieDetails;
+			sourceTree = "<group>";
+		};
+		D74BE6A8210DD37A00E1F792 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D74BE6AB210E033500E1F792 /* AYMovieListModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,7 +346,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D74BE6B0210E57C500E1F792 /* AYUrlEncoder.swift in Sources */,
+				D74BE6AC210E033500E1F792 /* AYMovieListModel.swift in Sources */,
+				D74BE6AA210DDA9700E1F792 /* AYNetworkManager.swift in Sources */,
+				D74BE6A7210DD35700E1F792 /* AYMovieListViewModel.swift in Sources */,
 				D736C1D0210CC17B00ACC084 /* AYMoviesListViewController.swift in Sources */,
+				D74BE6AE210E578400E1F792 /* AYNetworkLogger.swift in Sources */,
+				D74BE6B2210E5D3200E1F792 /* FoundationAdditions.swift in Sources */,
 				D736C1D4210D732500ACC084 /* AYReusableCellHandler.swift in Sources */,
 				D736C1C9210C943200ACC084 /* AppDelegate.swift in Sources */,
 				D736C1D2210D700200ACC084 /* AYMovieListCollectionCell.swift in Sources */,
