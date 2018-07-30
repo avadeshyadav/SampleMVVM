@@ -10,4 +10,5 @@ import UIKit
 
 class AYMovieListCollectionCell: UICollectionViewCell, CellReusable {
         
+    @IBOutlet weak var imageView: UIImageView!
 }

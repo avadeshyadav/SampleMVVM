@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Result<String>{
     case success
@@ -31,12 +32,41 @@ class MovieRequest: APIRequest {
     }
 }
 
+class ImageRequest: APIRequest {
+    
+    typealias RequestDataType = String
+    typealias ResponseDataType = UIImage
+    
+    func makeRequest(from imagePath: String) throws -> URLRequest {
+        
+        let url = try? URLEncoder().urlWith(string: "https://image.tmdb.org/t/p/w200\(imagePath)", parameters: nil)
+        let urlRequest = URLRequest(url: url!)
+        return urlRequest
+    }
+    
+    func parseResponse(data: Data) throws -> UIImage {
+        return UIImage(data: data) ?? UIImage()
+    }
+    
+    func shouldCacheResponse() -> Bool {
+        return true
+    }
+}
+
 protocol APIRequest {
     associatedtype RequestDataType
     associatedtype ResponseDataType
     func makeRequest(from data: RequestDataType) throws -> URLRequest
     func parseResponse(data: Data) throws -> ResponseDataType
+    func shouldCacheResponse() -> Bool
 }
+
+extension APIRequest {
+    func shouldCacheResponse() -> Bool {
+        return false
+    }
+}
+
 
 class APIRequestLoader<T: APIRequest> {
   
@@ -53,10 +83,18 @@ class APIRequestLoader<T: APIRequest> {
         do {
             let urlRequest = try apiRequest.makeRequest(from: requestData)
             AYNetworkLogger.log(request: urlRequest)
+            
+            if let response = getCachedData(from: urlRequest) {
+                completionHandler(response, nil)
+                return
+            }
+            
             let task = urlSession.dataTask(with: urlRequest) { data, response, error in
               
                 AYNetworkLogger.log(response: response, data: data, error: error, forRequest: urlRequest)
                 guard let data = data else { return completionHandler(nil, error) }
+                self.cacheData(data: data, forRequest: urlRequest)
+               
                 do {
                     let parsedResponse = try self.apiRequest.parseResponse(data: data)
                     DispatchQueue.main.async {
@@ -74,5 +112,29 @@ class APIRequestLoader<T: APIRequest> {
             print("unable to create request")        }
     }
 }
+
+//MARK: Cache functionality
+
+let dataCache = NSCache<NSString, NSData>()
+
+extension APIRequestLoader {
+    
+    func getCachedData(from request: URLRequest) -> T.ResponseDataType? {
+      
+        if let key = request.url?.absoluteString, let cachedData = dataCache.object(forKey: key as NSString) {
+            return try? self.apiRequest.parseResponse(data: cachedData as Data)
+        }
+        
+        return nil
+    }
+    
+    func cacheData(data: Data, forRequest: URLRequest?) {
+        if let key = forRequest?.url?.absoluteString {
+            dataCache.setObject(data as NSData, forKey: key as NSString)
+        }
+    }
+}
+
+
 
 

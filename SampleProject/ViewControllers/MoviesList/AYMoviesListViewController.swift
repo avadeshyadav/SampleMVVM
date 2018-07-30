@@ -47,7 +47,21 @@ extension AYMoviesListViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: AYMovieListCollectionCell = collectionView.dequeueCell(atIndexPath: indexPath)
-        cell.backgroundColor = UIColor.red
+        cell.backgroundColor = UIColor.lightGray
+        
+        let movie = model.movieApiReponse.movies[indexPath.item]
+       
+        if let path = movie.posterPath {
+            
+            let dataLoader = APIRequestLoader(apiRequest: ImageRequest())
+            dataLoader.loadAPIRequest(requestData: path) { [weak cell] (apiResponse, error) in
+                
+                if let response = apiResponse {
+                    cell?.imageView.image = response
+                }
+            }
+        }
+        
         return cell
     }
     
