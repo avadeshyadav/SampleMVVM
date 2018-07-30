@@ -11,12 +11,12 @@ import XCTest
 
 class AYMovieRequestTests: XCTestCase {
     
-    var loader: APIRequestLoader<MovieRequest>!
+    var loader: APIRequestLoader<MovieListRequest>!
 
     override func setUp() {
         super.setUp()
 
-        let request = MovieRequest()
+        let request = MovieListRequest()
         
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]

@@ -7,55 +7,19 @@
 //
 
 import Foundation
-import UIKit
 
 enum Result<String>{
     case success
     case failure(String)
 }
 
-class MovieRequest: APIRequest {
-    
-    typealias RequestDataType = String
-    typealias ResponseDataType = MovieApiResponse
-
-    func makeRequest(from pageNumber: String) throws -> URLRequest {
-
-        let params: [String: String] = ["page": pageNumber, "api_key": "7a312711d0d45c9da658b9206f3851dd"]
-        let url = try? URLEncoder().urlWith(string: "https://api.themoviedb.org/3/discover/movie", parameters: params)
-        let urlRequest = URLRequest(url: url!)
-        return urlRequest
-    }
-    
-    func parseResponse(data: Data) throws -> MovieApiResponse {
-        return try JSONDecoder().decode(MovieApiResponse.self, from: data)
-    }
-}
-
-class ImageRequest: APIRequest {
-    
-    typealias RequestDataType = String
-    typealias ResponseDataType = UIImage
-    
-    func makeRequest(from imagePath: String) throws -> URLRequest {
-        
-        let url = try? URLEncoder().urlWith(string: "https://image.tmdb.org/t/p/w200\(imagePath)", parameters: nil)
-        let urlRequest = URLRequest(url: url!)
-        return urlRequest
-    }
-    
-    func parseResponse(data: Data) throws -> UIImage {
-        return UIImage(data: data) ?? UIImage()
-    }
-    
-    func shouldCacheResponse() -> Bool {
-        return true
-    }
-}
+let kBaseImageURLPath: String = "https://image.tmdb.org/t/p/w200"
 
 protocol APIRequest {
+    
     associatedtype RequestDataType
     associatedtype ResponseDataType
+   
     func makeRequest(from data: RequestDataType) throws -> URLRequest
     func parseResponse(data: Data) throws -> ResponseDataType
     func shouldCacheResponse() -> Bool
@@ -72,6 +36,7 @@ class APIRequestLoader<T: APIRequest> {
   
     let apiRequest: T
     let urlSession: URLSession
+    var task: URLSessionDataTask?
     
     init(apiRequest: T, urlSession: URLSession = .shared) {
         self.apiRequest = apiRequest
@@ -89,7 +54,7 @@ class APIRequestLoader<T: APIRequest> {
                 return
             }
             
-            let task = urlSession.dataTask(with: urlRequest) { data, response, error in
+            task = urlSession.dataTask(with: urlRequest) { data, response, error in
               
                 AYNetworkLogger.log(response: response, data: data, error: error, forRequest: urlRequest)
                 guard let data = data else { return completionHandler(nil, error) }
@@ -106,10 +71,16 @@ class APIRequestLoader<T: APIRequest> {
                     }
                 }
             }
-            task.resume()
+            task?.resume()
         }
         catch {
-            print("unable to create request")        }
+            print("unable to create request")
+        }
+    }
+    
+    func cancelTask()  {
+        task?.cancel()
+        task = nil
     }
 }
 
