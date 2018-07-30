@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D736C195210C933300ACC084 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D736C194210C933300ACC084 /* Assets.xcassets */; };
-		D736C1A3210C933400ACC084 /* SampleProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1A2210C933400ACC084 /* SampleProjectTests.swift */; };
 		D736C1AE210C933400ACC084 /* SampleProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D736C1AD210C933400ACC084 /* SampleProjectUITests.swift */; };
 		D736C1C7210C943200ACC084 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D736C1C0210C943200ACC084 /* LaunchScreen.storyboard */; };
 		D736C1C8210C943200ACC084 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D736C1C2210C943200ACC084 /* Main.storyboard */; };
@@ -23,6 +22,9 @@
 		D74BE6AE210E578400E1F792 /* AYNetworkLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6AD210E578400E1F792 /* AYNetworkLogger.swift */; };
 		D74BE6B0210E57C500E1F792 /* AYUrlEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6AF210E57C500E1F792 /* AYUrlEncoder.swift */; };
 		D74BE6B2210E5D3200E1F792 /* FoundationAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6B1210E5D3200E1F792 /* FoundationAdditions.swift */; };
+		D74BE6B7210ED0BD00E1F792 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6B6210ED0BD00E1F792 /* NetworkManagerTests.swift */; };
+		D74BE6B9210ED15A00E1F792 /* AYUrlEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6B8210ED15A00E1F792 /* AYUrlEncoderTests.swift */; };
+		D74BE6BB210F05A400E1F792 /* AYMovieRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6BA210F05A400E1F792 /* AYMovieRequestTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +48,6 @@
 		D736C18A210C932800ACC084 /* SampleProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D736C194210C933300ACC084 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D736C19E210C933400ACC084 /* SampleProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D736C1A2210C933400ACC084 /* SampleProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProjectTests.swift; sourceTree = "<group>"; };
 		D736C1A4210C933400ACC084 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D736C1A9210C933400ACC084 /* SampleProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D736C1AD210C933400ACC084 /* SampleProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleProjectUITests.swift; sourceTree = "<group>"; };
@@ -64,6 +65,9 @@
 		D74BE6AD210E578400E1F792 /* AYNetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYNetworkLogger.swift; sourceTree = "<group>"; };
 		D74BE6AF210E57C500E1F792 /* AYUrlEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYUrlEncoder.swift; sourceTree = "<group>"; };
 		D74BE6B1210E5D3200E1F792 /* FoundationAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationAdditions.swift; sourceTree = "<group>"; };
+		D74BE6B6210ED0BD00E1F792 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		D74BE6B8210ED15A00E1F792 /* AYUrlEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYUrlEncoderTests.swift; sourceTree = "<group>"; };
+		D74BE6BA210F05A400E1F792 /* AYMovieRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMovieRequestTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +132,7 @@
 		D736C1A1210C933400ACC084 /* SampleProjectTests */ = {
 			isa = PBXGroup;
 			children = (
-				D736C1A2210C933400ACC084 /* SampleProjectTests.swift */,
+				D74BE6B5210ED00F00E1F792 /* Networking */,
 				D736C1A4210C933400ACC084 /* Info.plist */,
 			);
 			path = SampleProjectTests;
@@ -214,6 +218,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		D74BE6B5210ED00F00E1F792 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D74BE6B6210ED0BD00E1F792 /* NetworkManagerTests.swift */,
+				D74BE6B8210ED15A00E1F792 /* AYUrlEncoderTests.swift */,
+				D74BE6BA210F05A400E1F792 /* AYMovieRequestTests.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,6 +299,7 @@
 					};
 					D736C19D210C933400ACC084 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 						TestTargetID = D736C189210C932800ACC084;
 					};
 					D736C1A8210C933400ACC084 = {
@@ -363,7 +378,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D736C1A3210C933400ACC084 /* SampleProjectTests.swift in Sources */,
+				D74BE6BB210F05A400E1F792 /* AYMovieRequestTests.swift in Sources */,
+				D74BE6B9210ED15A00E1F792 /* AYUrlEncoderTests.swift in Sources */,
+				D74BE6B7210ED0BD00E1F792 /* NetworkManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +580,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SampleProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -572,6 +590,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.avadesh.SampleProjectTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SampleProject.app/SampleProject";
@@ -583,6 +602,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = SampleProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

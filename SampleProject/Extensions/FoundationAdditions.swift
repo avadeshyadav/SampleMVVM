@@ -17,3 +17,13 @@ extension Data {
         return object
     }
 }
+
+
+extension Dictionary {
+        
+    func toJSONData() -> Data? {
+        
+        let data = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+        return data
+    }
+}
