@@ -11,7 +11,7 @@ import UIKit
 class AYMovieListCollectionCell: UICollectionViewCell, CellReusable {
         
     @IBOutlet weak var imageView: UIImageView!
-    let dataLoader = APIRequestLoader(apiRequest: ImageRequest())
+    var imageLoader: APIRequestLoader<ImageRequest>?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,7 +20,8 @@ class AYMovieListCollectionCell: UICollectionViewCell, CellReusable {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        dataLoader.cancelTask()
+        imageLoader?.cancelTask()
+        imageView.image = nil
     }
     
     //MARK: Public methods
@@ -30,7 +31,9 @@ class AYMovieListCollectionCell: UICollectionViewCell, CellReusable {
             return
         }
         
-        dataLoader.loadAPIRequest(requestData: imageUrlString) { [weak self] (apiResponse, error) in
+        imageLoader?.cancelTask()
+        imageLoader = APIRequestLoader(apiRequest: ImageRequest())
+        imageLoader?.loadAPIRequest(requestData: imageUrlString) { [weak self] (apiResponse, error) in
             
             if let response = apiResponse {
                 self?.imageView.image = response

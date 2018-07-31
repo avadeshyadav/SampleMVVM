@@ -11,6 +11,8 @@ import UIKit
 class AYMoviesListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var constraintCollectionViewBottomMargin: NSLayoutConstraint!
+    
     let model = AYMovieListViewModel()
     
     override func viewDidLoad() {
@@ -27,6 +29,8 @@ class AYMoviesListViewController: UIViewController {
       
         model.getMoviesList { [weak self] (result) in
             
+            self?.isLoadingNextPageResults(false)
+
             switch (result) {
             case .success:
                 self?.collectionView.reloadData()
@@ -38,7 +42,7 @@ class AYMoviesListViewController: UIViewController {
     }
 }
 
-
+//MARK: - ColectionView Delegate and data source handling
 extension AYMoviesListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -53,5 +57,68 @@ extension AYMoviesListViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width-44)/3 , height: (UIScreen.main.bounds.width/3)+20)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        guard model.canLoadNextPage() else {
+            return
+        }
+        
+        let margin: CGFloat = 30
+        let heightToLoadNextPage: CGFloat = scrollView.contentSize.height + margin
+        let currentPosition: CGFloat = scrollView.contentOffset.y + scrollView.frame.size.height
+        
+        if (currentPosition >= heightToLoadNextPage) {
+            isLoadingNextPageResults(true)
+            loadNextPageResults()
+        }
+        
+    }
+}
+
+//MARK: - Lazy loading functionality
+
+let kLoaderViewTag = 1011
+let kLoaderViewHeight: CGFloat = 50
+
+extension AYMoviesListViewController {
+    
+    func loadNextPageResults() {
+        loadMovies()
+    }
+    
+    func isLoadingNextPageResults(_ isLoading: Bool) {
+        
+        model.isLoadingNextPageResults = isLoading
+        
+        if isLoading {
+            constraintCollectionViewBottomMargin.constant = kLoaderViewHeight
+            addLoaderViewForNextResults()
+            
+        }
+        else {
+            
+            self.constraintCollectionViewBottomMargin.constant = 0
+            
+            let view = self.view.viewWithTag(kLoaderViewTag)
+            view?.removeFromSuperview()
+        }
+        
+        self.view.layoutIfNeeded()
+    }
+    func addLoaderViewForNextResults() {
+        let view = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height - kLoaderViewHeight , width: self.view.frame.size.width, height: kLoaderViewHeight))
+        view.backgroundColor = UIColor.lightGray
+        view.tag = kLoaderViewTag
+        
+        let indicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        indicatorView.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
+        indicatorView.startAnimating()
+        indicatorView.color = UIColor.darkGray
+        indicatorView.isHidden = false
+        view.addSubview(indicatorView)
+        
+        self.view.addSubview(view)
     }
 }

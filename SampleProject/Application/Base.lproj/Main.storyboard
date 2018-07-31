@@ -85,6 +85,7 @@
                     <navigationItem key="navigationItem" id="wTp-Ec-DyB"/>
                     <connections>
                         <outlet property="collectionView" destination="VM0-k2-cuU" id="yoD-2u-QwI"/>
+                        <outlet property="constraintCollectionViewBottomMargin" destination="LlS-UE-fpC" id="VRK-Yy-v7H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

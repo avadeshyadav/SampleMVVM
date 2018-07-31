@@ -34,7 +34,19 @@ struct AYMovieListCellViewModel {
 class AYMovieListViewModel {
     
     var movieApiReponse = MovieApiResponse()
-
+    var isLoadingNextPageResults: Bool = false
+    
+    func canLoadNextPage() -> Bool {
+        
+        if isLoadingNextPageResults { return false }
+        
+        if let currentPage = movieApiReponse.page, let totalPages = movieApiReponse.numberOfPages, currentPage + 1 > totalPages {
+            return false
+        }
+        
+        return true
+    }
+    
     func getListCellViewModel(at indexPath: IndexPath) -> AYMovieListCellViewModel {
         return AYMovieListCellViewModel(with: movieApiReponse.movies[indexPath.item])
     }
