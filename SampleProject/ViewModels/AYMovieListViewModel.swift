@@ -35,10 +35,16 @@ class AYMovieListViewModel {
     
     var movieApiReponse = MovieApiResponse()
     var isLoadingNextPageResults: Bool = false
+    var isUserRefreshingList: Bool = false
+    let apiLoader: APIRequestLoader<MovieListRequest>
+
+    init(_ loader: APIRequestLoader<MovieListRequest> = APIRequestLoader(apiRequest: MovieListRequest())) {
+        apiLoader = loader
+    }
     
     func canLoadNextPage() -> Bool {
         
-        if isLoadingNextPageResults { return false }
+        if isLoadingNextPageResults || isUserRefreshingList { return false }
         
         if let currentPage = movieApiReponse.page, let totalPages = movieApiReponse.numberOfPages, currentPage + 1 > totalPages {
             return false
@@ -53,9 +59,8 @@ class AYMovieListViewModel {
     
     func getMoviesList(result: @escaping (Result<String>)-> Void) {
 
-        let nextPage = movieApiReponse.page != nil ? movieApiReponse.page! + 1 : 1
-        let dataLoader = APIRequestLoader(apiRequest: MovieListRequest())
-        dataLoader.loadAPIRequest(requestData: "\(nextPage)") { [weak self] (apiResponse, error) in
+        let page = isUserRefreshingList ? 1 : (movieApiReponse.page ?? 0) + 1
+        apiLoader.loadAPIRequest(requestData: "\(page)") { [weak self] (apiResponse, error) in
             
             if let response = apiResponse {
                 self?.movieApiReponse.addResults(from: response)

@@ -57,7 +57,10 @@ class APIRequestLoader<T: APIRequest> {
             task = urlSession.dataTask(with: urlRequest) { data, response, error in
               
                 AYNetworkLogger.log(response: response, data: data, error: error, forRequest: urlRequest)
-                guard let data = data else { return completionHandler(nil, error) }
+                guard let data = data else {
+                    DispatchQueue.main.async {  completionHandler(nil, error) }
+                    return
+                }
                 self.cacheData(data: data, forRequest: urlRequest)
                
                 do {

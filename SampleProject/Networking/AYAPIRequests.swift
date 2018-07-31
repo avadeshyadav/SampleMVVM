@@ -31,8 +31,7 @@ class ImageRequest: APIRequest {
     
     func makeRequest(from imagePath: String) throws -> URLRequest {
         
-        let url = try? URLEncoder().urlWith(string: imagePath, parameters: nil)
-        let urlRequest = URLRequest(url: url!)
+        let urlRequest = URLRequest(url: URL(string: imagePath)!)
         return urlRequest
     }
     

@@ -13,6 +13,7 @@ class AYMoviesListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var constraintCollectionViewBottomMargin: NSLayoutConstraint!
     
+    var refreshControl: UIRefreshControl?
     let model = AYMovieListViewModel()
     
     override func viewDidLoad() {
@@ -23,6 +24,7 @@ class AYMoviesListViewController: UIViewController {
     
     private func doInitialConfigurations() {
         self.title = "Movies"
+        configureRefreshControl(on: collectionView)
     }
     
     private func loadMovies() {
@@ -30,6 +32,7 @@ class AYMoviesListViewController: UIViewController {
         model.getMoviesList { [weak self] (result) in
             
             self?.isLoadingNextPageResults(false)
+            self?.refreshControl?.endRefreshing()
 
             switch (result) {
             case .success:
@@ -77,6 +80,25 @@ extension AYMoviesListViewController: UICollectionViewDataSource, UICollectionVi
     }
 }
 
+//MARK: - Pull to refresh functionality
+extension AYMoviesListViewController {
+   
+    func configureRefreshControl(on collectionView: UICollectionView) {
+      
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refershMovieList), for: .valueChanged)
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.collectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refershMovieList() {
+        
+        model.isUserRefreshingList = true
+        refreshControl?.beginRefreshing()
+        loadMovies()
+    }
+}
+
 //MARK: - Lazy loading functionality
 
 let kLoaderViewTag = 1011
@@ -107,6 +129,7 @@ extension AYMoviesListViewController {
         
         self.view.layoutIfNeeded()
     }
+    
     func addLoaderViewForNextResults() {
         let view = UIView(frame: CGRect(x: 0, y: self.view.frame.size.height - kLoaderViewHeight , width: self.view.frame.size.width, height: kLoaderViewHeight))
         view.backgroundColor = UIColor.lightGray
@@ -115,7 +138,7 @@ extension AYMoviesListViewController {
         let indicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         indicatorView.center = CGPoint(x: view.frame.size.width / 2, y: view.frame.size.height / 2)
         indicatorView.startAnimating()
-        indicatorView.color = UIColor.darkGray
+        indicatorView.color = UIColor.white
         indicatorView.isHidden = false
         view.addSubview(indicatorView)
         

@@ -27,6 +27,7 @@
 		D74BE6BB210F05A400E1F792 /* AYMovieRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6BA210F05A400E1F792 /* AYMovieRequestTests.swift */; };
 		D74BE6BD210F87D200E1F792 /* AYUIViewAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6BC210F87D200E1F792 /* AYUIViewAdditions.swift */; };
 		D74BE6BF210F8F8F00E1F792 /* AYAPIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6BE210F8F8F00E1F792 /* AYAPIRequests.swift */; };
+		D74BE6C12110E99300E1F792 /* AYMoviesListTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74BE6C02110E99300E1F792 /* AYMoviesListTestCases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		D74BE6BA210F05A400E1F792 /* AYMovieRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMovieRequestTests.swift; sourceTree = "<group>"; };
 		D74BE6BC210F87D200E1F792 /* AYUIViewAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYUIViewAdditions.swift; sourceTree = "<group>"; };
 		D74BE6BE210F8F8F00E1F792 /* AYAPIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYAPIRequests.swift; sourceTree = "<group>"; };
+		D74BE6C02110E99300E1F792 /* AYMoviesListTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AYMoviesListTestCases.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				D74BE6B5210ED00F00E1F792 /* Networking */,
 				D736C1A4210C933400ACC084 /* Info.plist */,
+				D74BE6C02110E99300E1F792 /* AYMoviesListTestCases.swift */,
 			);
 			path = SampleProjectTests;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 			files = (
 				D74BE6BB210F05A400E1F792 /* AYMovieRequestTests.swift in Sources */,
 				D74BE6B9210ED15A00E1F792 /* AYUrlEncoderTests.swift in Sources */,
+				D74BE6C12110E99300E1F792 /* AYMoviesListTestCases.swift in Sources */,
 				D74BE6B7210ED0BD00E1F792 /* NetworkManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
