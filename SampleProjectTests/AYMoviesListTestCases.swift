@@ -61,7 +61,6 @@ class AYMovieListViewModelTestCases: XCTestCase {
     func testLoadingMoviesList() {
         
         MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.url?.query?.contains("page=1"), true)
             return (HTTPURLResponse(), self.getMockJSONData())
         }
         
@@ -84,7 +83,6 @@ class AYMovieListViewModelTestCases: XCTestCase {
     func testLoadingMoviesListWithNextPageResultsAppended() {
         
         MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.url?.query?.contains("page=1"), true)
             return (HTTPURLResponse(), self.getMockJSONData())
         }
         
@@ -108,7 +106,6 @@ class AYMovieListViewModelTestCases: XCTestCase {
     func testLoadingMoviesListWithFailure() {
       
         MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.url?.query?.contains("page=1"), true)
             return (HTTPURLResponse(url: request.url!, statusCode: 400, httpVersion: nil, headerFields: nil)!, Data())
         }
         
@@ -129,7 +126,6 @@ class AYMovieListViewModelTestCases: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 1)
-        
     }
     
     

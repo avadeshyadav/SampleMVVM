@@ -61,7 +61,8 @@ class APIRequestLoader<T: APIRequest> {
                     DispatchQueue.main.async {  completionHandler(nil, error) }
                     return
                 }
-                self.cacheData(data: data, forRequest: urlRequest)
+                
+                if self.apiRequest.shouldCacheResponse() { self.cacheData(data: data, forRequest: urlRequest) }
                
                 do {
                     let parsedResponse = try self.apiRequest.parseResponse(data: data)
