@@ -9,16 +9,14 @@
 import XCTest
 @testable import SampleProject
 
-class AYMovieListViewModelTestCases: XCTestCase {
+class AYMovieListViewModelTestCases: AYBaseUnitTestCase, JSONMockable {
     
     var model: AYMovieListViewModel!
 
     override func setUp() {
         super.setUp()
         
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.protocolClasses = [MockURLProtocol.self]
-        let urlSession = URLSession(configuration: configuration)
+        let urlSession = getURLSessionWithMockConfigurations()
         model = AYMovieListViewModel(APIRequestLoader(apiRequest: MovieListRequest(), urlSession: urlSession))
         model.movieApiReponse.page = 1
         model.movieApiReponse.numberOfPages = 2
@@ -61,7 +59,7 @@ class AYMovieListViewModelTestCases: XCTestCase {
     func testLoadingMoviesList() {
         
         MockURLProtocol.requestHandler = { request in
-            return (HTTPURLResponse(), self.getMockJSONData())
+            return (HTTPURLResponse(), self.getMockJSON().toJSONData()!)
         }
         
         let expectation = XCTestExpectation(description: "response")
@@ -83,7 +81,7 @@ class AYMovieListViewModelTestCases: XCTestCase {
     func testLoadingMoviesListWithNextPageResultsAppended() {
         
         MockURLProtocol.requestHandler = { request in
-            return (HTTPURLResponse(), self.getMockJSONData())
+            return (HTTPURLResponse(), self.getMockJSON().toJSONData()!)
         }
         
         let expectation = XCTestExpectation(description: "response")
@@ -126,13 +124,5 @@ class AYMovieListViewModelTestCases: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 1)
-    }
-    
-    
-    //MARK: Helper methods
-    func getMockJSONData() -> Data {
-      
-        let mockJSON: [String: Any] = ["page":2,"results":[["backdrop_path":"/g6WT9zxATzTy9NVu2xwbxDAxvjd.jpg","genre_ids":[28,12,878],"id": 157350,"original_language":"en","overview":"Trislearnsthatshe's been classified as Divergent and too late.","poster_path":"/yTtx2ciqk4XdN1oKhMMDy3f5ue3.jpg","release_date":"2014-03-14","title":"Divergent"]],"total_pages":18597,"total_results":371921]
-        return mockJSON.toJSONData()!
     }
 }
