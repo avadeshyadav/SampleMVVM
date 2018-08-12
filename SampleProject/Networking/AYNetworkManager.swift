@@ -14,6 +14,9 @@ enum Result<String>{
 }
 
 let kBaseImageURLPath: String = "https://image.tmdb.org/t/p/w200"
+let kMovieAPIKey: String = "7a312711d0d45c9da658b9206f3851dd"
+let kMovieAPIServer: String = "https://api.themoviedb.org"
+
 
 protocol APIRequest {
     
@@ -41,6 +44,7 @@ class APIRequestLoader<T: APIRequest> {
     init(apiRequest: T, urlSession: URLSession = .shared) {
         self.apiRequest = apiRequest
         self.urlSession = urlSession
+        self.urlSession.configuration.waitsForConnectivity = true
     }
     
     func loadAPIRequest(requestData: T.RequestDataType,

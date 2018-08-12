@@ -9,13 +9,20 @@
 import XCTest
 @testable import SampleProject
 
-class AYUrlEncoderTests: XCTestCase {
+struct APIURL {
+    
+}
+
+class AYUrlEncoderTests: XCTestCase, APIURLBuildable {
+    
+    func hostServer() -> String {
+        return "https://www.avadesh.com"
+    }
     
     func testURLCreation() {
         
-        let urlString: String = "https://www.avadesh.com"
         let parameters: [String: String] = ["name": "avadesh"]
-        let url = try? URLEncoder().urlWith(string: urlString, parameters: parameters)
+        let url = try? URLEncoder(with: self).encodedParams(parameters)
         
         XCTAssertNotNil(url, "URLEncoder unable to create a url")
         
@@ -27,9 +34,8 @@ class AYUrlEncoderTests: XCTestCase {
     
     func testAddingParameters() {
         
-        let urlString: String = "https://www.avadesh.com"
         let parameters: [String: String] = ["name": "avadesh"]
-        let url = try? URLEncoder().urlWith(string: urlString, parameters: parameters)
+        let url = try? URLEncoder(with: self).encodedParams(parameters)
         
         let components = URLComponents(string: url!.absoluteString)
         
