@@ -57,9 +57,10 @@ class AYMovieListViewModel {
         return AYMovieListCellViewModel(with: movieApiReponse.movies[indexPath.item])
     }
     
-    func getMoviesList(result: @escaping (Result<String>)-> Void) {
+    func getMoviesList(result: @escaping (Result<String>)-> Void, networkWaitBlock: WaitingForNetworkBlock?) {
 
         let page = isUserRefreshingList ? 1 : (movieApiReponse.page ?? 0) + 1
+        apiLoader.setNetworkWaitingBlock(networkWaitBlock)
         apiLoader.loadAPIRequest(requestData: "\(page)") { [weak self] (apiResponse, error) in
             
             if let response = apiResponse {

@@ -29,17 +29,26 @@ class AYMoviesListViewController: UIViewController {
     
     private func loadMovies() {
       
-        model.getMoviesList { [weak self] (result) in
+        model.getMoviesList(result: { [weak self] (result) in
             
             self?.isLoadingNextPageResults(false)
             self?.refreshControl?.endRefreshing()
-
+            
             switch (result) {
             case .success:
                 self?.collectionView.reloadData()
                 
             case .failure(let message):
                 print("received error while fetching data: \(message)")
+            }
+            
+        }) { [weak self] (waitForNetwork) in
+            
+            switch (waitForNetwork) {
+            case .started:
+                print("waitForNetwork: started")
+            case .ended:
+                print("waitForNetwork: ended")
             }
         }
     }
