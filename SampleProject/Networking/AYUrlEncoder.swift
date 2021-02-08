@@ -13,14 +13,43 @@ enum URLEncodingError: Swift.Error {
 }
 
 protocol URLEncodeble {
-    func urlWith(string: String, parameters: Dictionary<String, Any>?) throws -> URL
+    func encodedParams(_ parameters: Dictionary<String, Any>?) throws -> URL
+}
+
+enum APIVersion: String {
+    case v1 = "/1"
+    case v2 = "/2"
+    case v3 = "/3"
+    case none = ""
+}
+
+protocol APIURLBuildable {
+    func apiVersion() -> APIVersion
+    func hostServer() -> String
+    func endPoint() -> String
+}
+
+extension APIURLBuildable {
+    func hostServer() -> String { return kMovieAPIServer }
+    func apiVersion() -> APIVersion { return .none }
+    func endPoint() -> String { return "" }
 }
 
 class URLEncoder: URLEncodeble {
     
-    func urlWith(string: String, parameters: Dictionary<String, Any>?) throws -> URL {
+    var urlComponents: URLComponents?
+    
+    init(with urlBuildable: APIURLBuildable) {
         
-        guard var urlComponents = URLComponents(string: string) else {
+        var url: String = urlBuildable.hostServer()
+        url.append(urlBuildable.apiVersion().rawValue)
+        url.append(urlBuildable.endPoint())
+        urlComponents =  URLComponents(string: url)
+    }
+    
+    func encodedParams(_ parameters: Dictionary<String, Any>?) throws -> URL {
+        
+        guard var urlComponents = self.urlComponents else {
             throw URLEncodingError.URLStringNotURLConvertible
         }
         

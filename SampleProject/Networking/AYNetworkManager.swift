@@ -14,6 +14,9 @@ enum Result<String>{
 }
 
 let kBaseImageURLPath: String = "https://image.tmdb.org/t/p/w200"
+let kMovieAPIKey: String = "7a312711d0d45c9da658b9206f3851dd"
+let kMovieAPIServer: String = "https://api.themoviedb.org"
+
 
 protocol APIRequest {
     
@@ -31,16 +34,43 @@ extension APIRequest {
     }
 }
 
+enum WaitForNetwork: Int {
+    case started, ended
+}
 
-class APIRequestLoader<T: APIRequest> {
+typealias WaitingForNetworkBlock = (_ waitngForNetwork: WaitForNetwork) -> Void
+
+class APIRequestLoader<T: APIRequest>: NSObject, URLSessionDataDelegate, URLSessionTaskDelegate {
   
     let apiRequest: T
-    let urlSession: URLSession
-    var task: URLSessionDataTask?
+    var urlSession: URLSession?
     
-    init(apiRequest: T, urlSession: URLSession = .shared) {
+    private var task: URLSessionDataTask?
+    private var apiCompletionBlock: ((T.ResponseDataType?, Error?) -> Void)?
+    private var networkWaitingBlock: WaitingForNetworkBlock?
+    private var data: Data?
+    
+    deinit {
+        urlSession?.finishTasksAndInvalidate()
+        doCleanUp()
+    }
+    
+    init(apiRequest: T, urlSession: URLSession? = nil) {
         self.apiRequest = apiRequest
-        self.urlSession = urlSession
+        super.init()
+
+        if let session = urlSession {
+            self.urlSession = session
+        }
+        else {
+            let config = URLSessionConfiguration.default
+            config.waitsForConnectivity = true
+            self.urlSession = URLSession(configuration: config, delegate: self, delegateQueue: OperationQueue.current)
+        }
+    }
+    
+    func setNetworkWaitingBlock(_ block: WaitingForNetworkBlock?) {
+        networkWaitingBlock = block
     }
     
     func loadAPIRequest(requestData: T.RequestDataType,
@@ -54,27 +84,8 @@ class APIRequestLoader<T: APIRequest> {
                 return
             }
             
-            task = urlSession.dataTask(with: urlRequest) { data, response, error in
-              
-                AYNetworkLogger.log(response: response, data: data, error: error, forRequest: urlRequest)
-                guard let data = data else {
-                    DispatchQueue.main.async {  completionHandler(nil, error) }
-                    return
-                }
-                
-                if self.apiRequest.shouldCacheResponse() { self.cacheData(data: data, forRequest: urlRequest) }
-               
-                do {
-                    let parsedResponse = try self.apiRequest.parseResponse(data: data)
-                    DispatchQueue.main.async {
-                        completionHandler(parsedResponse, nil)
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completionHandler(nil, error)
-                    }
-                }
-            }
+            apiCompletionBlock = completionHandler
+            task = urlSession?.dataTask(with: urlRequest)
             task?.resume()
         }
         catch {
@@ -85,8 +96,62 @@ class APIRequestLoader<T: APIRequest> {
     func cancelTask()  {
         task?.cancel()
         task = nil
+        self.doCleanUp()
+    }
+    
+    //MARK: URLSessionDelegate Methods
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Swift.Void) {
+        completionHandler(.allow)
+        self.networkWaitingBlock?(.ended)
+        data = Data()
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        self.data?.append(data)
+    }
+    
+    func urlSession(_ session: URLSession, taskIsWaitingForConnectivity task: URLSessionTask) {
+        self.networkWaitingBlock?(.started)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Swift.Error?) {
+        
+        //defer {
+//            self.doCleanUp()
+        //}
+        
+        //        AYNetworkLogger.log(response: response, data: data, error: error, forRequest: urlRequest)
+        guard let data = self.data else {
+            DispatchQueue.main.async {
+                self.apiCompletionBlock?(nil, error)
+                self.doCleanUp()
+            }
+            return
+        }
+        
+        if self.apiRequest.shouldCacheResponse() { self.cacheData(data: data, forRequest: task.originalRequest) }
+        
+        do {
+            let parsedResponse = try self.apiRequest.parseResponse(data: data)
+            DispatchQueue.main.async {
+                self.apiCompletionBlock?(parsedResponse, nil)
+                self.doCleanUp()
+            }
+        } catch {
+            DispatchQueue.main.async {
+                self.apiCompletionBlock?(nil, error)
+                self.doCleanUp()
+            }
+        }
+    }
+    
+    func doCleanUp() {
+        self.apiCompletionBlock = nil
+        self.networkWaitingBlock = nil
+        self.data = nil
     }
 }
+
 
 //MARK: Cache functionality
 
@@ -95,7 +160,7 @@ let dataCache = NSCache<NSString, NSData>()
 extension APIRequestLoader {
     
     func getCachedData(from request: URLRequest) -> T.ResponseDataType? {
-      
+        
         if let key = request.url?.absoluteString, let cachedData = dataCache.object(forKey: key as NSString) {
             return try? self.apiRequest.parseResponse(data: cachedData as Data)
         }
@@ -109,7 +174,3 @@ extension APIRequestLoader {
         }
     }
 }
-
-
-
-

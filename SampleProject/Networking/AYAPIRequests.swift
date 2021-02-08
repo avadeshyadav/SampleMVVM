@@ -9,22 +9,27 @@
 import Foundation
 import UIKit
 
-class MovieListRequest: APIRequest {
+class MovieListRequest: APIRequest, APIURLBuildable {
     
     func makeRequest(from pageNumber: String) throws -> URLRequest {
         
-        let params: [String: String] = ["page": pageNumber, "api_key": "7a312711d0d45c9da658b9206f3851dd"]
-        let url = try? URLEncoder().urlWith(string: "https://api.themoviedb.org/3/discover/movie", parameters: params)
+        let url = try? URLEncoder(with: self).encodedParams(["page": pageNumber, "api_key": kMovieAPIKey])
         let urlRequest = URLRequest(url: url!)
         return urlRequest
+    }
+    
+    func apiVersion() -> APIVersion {
+        return .v3
+    }
+    
+    func endPoint() -> String {
+        return "/discover/movie"
     }
     
     func parseResponse(data: Data) throws -> MovieApiResponse {
         return try JSONDecoder().decode(MovieApiResponse.self, from: data)
     }
 }
-
-
 
 
 class ImageRequest: APIRequest {
